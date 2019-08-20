@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClockIt.Mobile.Views.SchedulesPage"
+             xmlns:converter="clr-namespace:ClockIt.Mobile.ValueConverters"
+             xmlns:behavior="clr-namespace:ClockIt.Mobile.Behaviors"
+             x:Name="ClockInPage"
+             Title="Clock It"
+             Padding="10,10">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:CIDateTimeConverter x:Key="dateFormat"/>
+            <converter:HoursSuffixConverter x:Key="hours"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Icon="clockitlogo.png"/>-->
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start" Spacing="0.2" Padding="0">
+            <StackLayout Orientation="Horizontal" Padding="10">
+
+                <Image Source="clock.png" HeightRequest="30" WidthRequest="30"/>
+                <Label Text="Schedules" FontSize="Large" VerticalOptions="Center" TextColor="Black"/>
+            </StackLayout>
+            <Button Text="Add Schedule" Command="{Binding ClockOutActivitiesCommand}" BackgroundColor="LightGreen"/>
+            <ListView ItemsSource="{Binding CISchedules}" BackgroundColor="LightGray" SeparatorColor="Blue" HasUnevenRows="True" HeightRequest="{Binding ListViewHeight}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" Spacing="0" VerticalOptions="Center">
+                                <StackLayout Orientation="Horizontal" Padding="10">
+                                    <Image Source="edit.png" WidthRequest="25">
+
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.EditScheduleCommand, Source={x:Reference ClockInPage}}"
+                                            CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+
+                                    </Image>
+                                    <Image Source="play.png" WidthRequest="25">
+
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.RunScheduleCommand, Source={x:Reference ClockInPage}}"
+                                            CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+
+                                    </Image>
+                                    <Label Text="{Binding Name}" VerticalOptions="Center" FontSize="Medium" TextColor="Black">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                            Command="{Binding Path=BindingContext.EditScheduleCommand, Source={x:Reference ClockInPage}}"
+                                            CommandParameter="{Binding .}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label Text="{Binding TotalHours, Converter={StaticResource hours}" VerticalOptions="Center" HorizontalOptions="EndAndExpand" TextColor="Black">
+                                    </Label>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label WidthRequest="30"/>
+                                    <Label Text="{Binding DateTime, Converter={StaticResource dateFormat}" VerticalOptions="Center" TextColor="Black" >
+                                    </Label>
+                                </StackLayout>
+                                <Label HeightRequest="10"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!--
+                <Image Source="plus_square.png" HorizontalOptions="Start" HeightRequest="40" WidthRequest="40" Margin="10"/>
+                <Label Text="Add Schedule" FontSize="Medium" TextColor="Black"/> -->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

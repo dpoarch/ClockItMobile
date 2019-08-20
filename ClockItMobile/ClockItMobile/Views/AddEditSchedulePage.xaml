@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClockIt.Mobile.Views.AddEditSchedulePage"
+             xmlns:converter="clr-namespace:ClockIt.Mobile.ValueConverters"
+             Title="{Binding Title}"
+            Padding="10,20">
+    <!--Pages can be added as references or inline-->
+    <ContentPage.ToolbarItems>
+        <!--
+        <ToolbarItem Icon="person.png" Command="{Binding AccountCommand}"/>
+        <ToolbarItem Icon="back.png" Command="{Binding BackToSchedulesCommand}"/>
+        -->
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Copy Schedule:" WidthRequest="80" HeightRequest="{Binding HeightAddEdit}" VerticalOptions="Center"/>
+                <Picker ItemsSource="{Binding CISchedules}" WidthRequest="200" HeightRequest="{Binding HeightAddEdit}" SelectedItem="{Binding SelectedTemplate}" ItemDisplayBinding="{Binding Name}" VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <Label Text="Date: " WidthRequest="80" VerticalOptions="Center"/>
+                <DatePicker Date="{Binding Schedule.DateTime}" WidthRequest="200"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <Label Text="Time: " WidthRequest="80" VerticalOptions="Center"/>
+                <TimePicker Time="{Binding Schedule.Time}" WidthRequest="200"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <Label Text="Name: " WidthRequest="80" VerticalOptions="Center"/>
+                <Entry Text="{Binding Schedule.Name}" WidthRequest="200"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="Periods: " HorizontalOptions="StartAndExpand"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+
+                    <Image Source="refresh.png" WidthRequest="25" HeightRequest="25" Margin="0,0,10,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ReorderPeriodsCommand"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="plus_square.png" WidthRequest="25" HeightRequest="25">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AddPeriodCommand"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" HeightRequest="20" BackgroundColor="Gray">
+                <Label WidthRequest="{Binding BlankWidth}"/>
+                <Label Text="Index" TextColor="White" HorizontalOptions="Center" WidthRequest="{Binding IndexWidth}"/>
+                <Label Text="Name" TextColor="White" HorizontalOptions="Center" WidthRequest="{Binding NameWidth}"/>
+                <Label Text="Minutes" TextColor="White" HorizontalOptions="Center" WidthRequest="{Binding MinutesWidth}"/>
+            </StackLayout>
+            <ScrollView HeightRequest="250">
+                <StackLayout x:Name="PeriodsLayout" Margin="0,0,0,10">
+                </StackLayout>
+            </ScrollView>
+            <!--
+                <Button Text="Add Period" Command="{Binding AddPeriodCommand}" />
+                <Button Text="Run Schedule" Command="{Binding RunScheduleCommand}"/>
+                <Button Text="Save Schedule" Command="{Binding SaveScheduleCommand}"/>
+                <Button Text="Delete Schedule" Command="{Binding DeleteScheduleCommand}"/>
+                <Button Text="Cancel" Command="{Binding BackToSchedulesCommand}"/>
+                -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="{Binding IconSpacing}">
+
+                <Image Source="play.png" WidthRequest="30" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RunScheduleCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="save.png" WidthRequest="30" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SaveScheduleCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="delete.png" WidthRequest="30" HeightRequest="30" IsVisible="{Binding IsEdit}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="DeleteScheduleCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="back.png" WidthRequest="30" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackToSchedulesCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClockIt.Mobile.Views.MainPage"
+             xmlns:behavior="clr-namespace:ClockIt.Mobile.Behaviors"
+             xmlns:converter="clr-namespace:ClockIt.Mobile.ValueConverters"
+             Title="Clock It"
+             Padding="10,20">
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="not"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand" Spacing="1" Padding="30">
+            <Entry Text="{Binding Username, Mode=TwoWay}" Placeholder="Email" IsEnabled="{Binding IsBusyIndicator, Converter={StaticResource not}}"/>
+            <Entry Text="{Binding Password, Mode=TwoWay}" Placeholder="Phone" Keyboard="Numeric" IsEnabled="{Binding IsBusyIndicator, Converter={StaticResource not}}"/>
+            <Button Text="Keep it" Command="{Binding LoginCommand}" IsEnabled="{Binding IsBusyIndicator, Converter={StaticResource not}}" BackgroundColor="LightGreen"/>
+            <!--<Button Text="Register" Command="{Binding RegisterCommand}" IsEnabled="{Binding IsBusyIndicator, Converter={StaticResource not}}"/>-->
+            <Label Text="{Binding StatusFormatted}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusyIndicator}" IsRunning="{Binding IsBusyIndicator}" Color="Gray"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

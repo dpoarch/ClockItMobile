@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClockIt.Mobile.Views.AccountPage"
+             Title ="Account Details"
+             Padding="10,20">
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Icon="clockitlogo.png"/>-->
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="Email" VerticalOptions="Center"/>
+                <Entry Text="{Binding Email}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsEnabled="false"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Phone" VerticalOptions="Center"/>
+                <Entry Text="{Binding Phone}" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsEnabled="false"/>
+            </StackLayout>
+            <Label Text="{Binding SchedulesCount}" HorizontalOptions="FillAndExpand"/>
+            <Label Text="{Binding DateCreated}" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Back" Command="{Binding BackCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

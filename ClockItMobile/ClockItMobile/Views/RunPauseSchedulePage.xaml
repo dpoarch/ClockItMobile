@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding Title}"
+             xmlns:converter="clr-namespace:ClockIt.Mobile.ValueConverters"
+             x:Class="ClockIt.Mobile.Views.RunPauseSchedulePage"
+             Padding="10,10">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:IntervalConverter x:Key="not"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Spacing="0">
+            <StackLayout Orientation="Horizontal">
+
+                <Image Source="period.png" HeightRequest="{Binding EmailButtonWidth}" WidthRequest="{Binding EmailButtonWidth}"/>
+                <Label Text="{Binding Periods}" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" TextColor="Black" WidthRequest="{Binding LabelWidth}"/>
+                <Image Source="clock.png" HeightRequest="{Binding EmailButtonWidth}" WidthRequest="{Binding EmailButtonWidth}"/>
+                <Label Text="{Binding Hours}" FontAttributes="Bold" FontSize="Medium" VerticalOptions="Center" TextColor="Black" WidthRequest="{Binding ViewByLabelWidth}"/>
+                <Image Source="pause.png" HeightRequest="{Binding EmailButtonWidth}" WidthRequest="{Binding EmailButtonWidth}" x:Name="playPauseImage">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PausePlayCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="stop.png" HeightRequest="{Binding EmailButtonWidth}" WidthRequest="{Binding EmailButtonWidth}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="StopCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="list_bullet.png" HeightRequest="{Binding EmailButtonWidth}" WidthRequest="{Binding EmailButtonWidth}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ShowHideListCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <DatePicker Date="{Binding CurrentDate}" IsVisible="False" x:Name="DatePicker"/>
+            </StackLayout>
+            <Label Text="{Binding PeriodName}" FontSize="Medium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Black" Margin="20"/>
+            <Label Text="{Binding PeriodIndex}" FontSize="Medium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Black" Margin="10"/>
+            <Label Text="{Binding TimerDisplay}" FontSize="Medium" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="Black" Margin="10"/>
+            <Label HeightRequest="30"/>
+            <StackLayout Orientation="Horizontal" BackgroundColor="Gray" x:Name="layout" HorizontalOptions="FillAndExpand">
+
+                <Label Text="   Periods: " FontSize="Large" TextColor="White" HorizontalOptions="StartAndExpand"/>
+                <Image Source="jump.png" WidthRequest="30" HeightRequest="30" Margin="0,0,30,0" HorizontalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="JumpCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            <ListView ItemsSource="{Binding PeriodsDisplay}" Margin="10" x:Name="periods" HeightRequest="{Binding ListViewHeight}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Index}" TextColor="Black" FontSize="Medium" VerticalOptions="Center" WidthRequest="50"/>
+                                <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium" VerticalOptions="Center" WidthRequest="125"/>
+                                <Label Text="{Binding Interval, Converter={StaticResource not}}" TextColor="Black" FontSize="Medium" VerticalOptions="Center" WidthRequest="125"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+
+                <Image Source="back.png" WidthRequest="30" HeightRequest="30">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackToSchedulesCommand"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

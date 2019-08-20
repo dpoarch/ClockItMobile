@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClockIt.Mobile.NoNetworkPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="No Network Connection Available" HorizontalOptions="Center" VerticalOptions="Center" TextColor="DarkGray" />
+            <Button Text="Back to login" Clicked="OnButtonClicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
